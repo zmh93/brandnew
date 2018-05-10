@@ -1,6 +1,7 @@
 package com.brandnew.jpatest.repository;
 
 import com.brandnew.jpatest.dto.Customer;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,6 +34,9 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query(nativeQuery = true,value = "select * from Customer c where c.first_name like concat('%',?1,'%')")
     List<Customer> findByName3(@Param("name") String others);
 
+    //使用Sort进行排序
+    @Query("select c from Customer c where c.lastName like %:name%")
+    List<Customer> findByName3Sort(@Param("name") String others,Sort sort);
 
 
 }

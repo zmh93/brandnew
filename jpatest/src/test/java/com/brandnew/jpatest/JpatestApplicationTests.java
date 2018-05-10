@@ -13,16 +13,42 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class JpatestApplicationTests {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerRepository repository;
 
     @Test
     public void contextLoads() {
-        customerRepository.save(new Customer("zhao", "menghui"));
+        repository.save(new Customer("Jack", "Bauer"));
+        repository.save(new Customer("Chloe", "O'Brian"));
+        repository.save(new Customer("Kim", "Bauer"));
+        repository.save(new Customer("David", "Palmer"));
+        repository.save(new Customer("Michelle", "Dessler"));
+        repository.save(new Customer("Bauer", "Dessler"));
     }
 
     @Test
-    public void query() {
-        System.out.println(customerRepository.getOne(1L));
+    public void primaryQuery() {
+        System.out.println(repository.getOne(2L));
+        repository.deleteById(2L);
+        repository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    public void juniorQuery() {
+        repository.findByLastName("Dessler").forEach(System.out::println);
+    }
+
+    @Test
+    public void juniorNamedQuery() {
+        System.out.println(repository.findByFirstName("Michelle"));
+    }
+
+    @Test
+    public void seniorQuery() {
+//        repository.findByFirstName1("Michelle").forEach(System.out::println);
+//        repository.findByLastName2("a").forEach(System.out::println);
+//        System.out.println(repository.findByName1("David", "Palmer"));
+//        repository.findAll().forEach(System.out::println);
+        System.out.println(repository.findByName3("a"));
     }
 
 }

@@ -63,4 +63,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query("SELECT c.firstName as firstName,c.lastName as lastName from Customer  c")
     Collection<CustomerProjection> findCustomerProject();
+
+    /**
+     * 使用super.save(ModelClass),可以自动根据primary_key是否存在 选择插入或更新 数据
+     */
+
+
 }

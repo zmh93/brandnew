@@ -1,6 +1,5 @@
 target/
 
-application-local.yml
 !.mvn/wrapper/maven-wrapper.jar
 mvn*
 .mvn

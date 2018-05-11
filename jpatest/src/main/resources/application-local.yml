@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/new-tech-learn?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: admin
+  jpa:
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+        hbm2ddl:
+          auto: update # 更新表结构，如果不存在则创建
+    show-sql: true
+logging:
+  level:
+    root: error

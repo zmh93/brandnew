@@ -73,4 +73,9 @@ public class JpatestApplicationTests {
         Page<Customer> pageResult = repository.findByName("a", page);
         pageResult.getContent().forEach(System.out::println);
     }
+
+    @Test
+    public void testProjection() {
+        repository.findCustomerProject().forEach(x->System.out.println(x.getFirstName()));
+    }
 }

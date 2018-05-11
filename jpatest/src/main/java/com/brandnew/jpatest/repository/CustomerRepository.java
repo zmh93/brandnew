@@ -1,6 +1,7 @@
 package com.brandnew.jpatest.repository;
 
 import com.brandnew.jpatest.dto.Customer;
+import com.brandnew.jpatest.dto.CustomerProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -12,6 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.QueryHint;
+import java.util.Collection;
 import java.util.List;
 
 import static org.hibernate.jpa.QueryHints.HINT_COMMENT;
@@ -58,4 +60,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("select c from Customer c where c.firstName like %:name% or c.lastName like %:name%")
     Page<Customer> findByName(@Param("name") String name2, Pageable pageable);
 
+
+    @Query("SELECT c.firstName as firstName,c.lastName as lastName from Customer  c")
+    Collection<CustomerProjection> findCustomerProject();
 }

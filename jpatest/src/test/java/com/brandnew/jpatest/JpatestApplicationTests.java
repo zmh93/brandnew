@@ -1,9 +1,12 @@
 package com.brandnew.jpatest;
 
 import com.brandnew.jpatest.dto.Customer;
+import com.brandnew.jpatest.dto.MyOrder;
 import com.brandnew.jpatest.repository.CustomerRepository;
 import com.brandnew.jpatest.repository.CustomerSpecificationRepository;
+import com.brandnew.jpatest.repository.MyOrderRepository;
 import com.brandnew.jpatest.util.SpecificationFactory;
+import org.hibernate.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.persistence.criteria.*;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -94,4 +100,53 @@ public class JpatestApplicationTests {
 
     }
 
+    @Autowired
+    private MyOrderRepository myOrderRepository;
+
+    @Test
+    public void saveMyOrders() {
+        Optional<Customer> byId = repository.findById(1L);
+        Customer           customer = byId.get();/*
+        myOrderRepository.save(new MyOrder("柿饼", "3000", customer));
+        myOrderRepository.save(new MyOrder("苹果", "1000", customer));
+        myOrderRepository.save(new MyOrder("橘子", "2000", customer));
+        myOrderRepository.save(new MyOrder("香蕉", "10000", customer));*/
+        myOrderRepository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    public void testForTemp() {
+        System.out.println(repository.findByFirstName1("zhao"));
+    }
+
+    @Test
+    public void testSpecification1() {
+        Specification<MyOrder> spec = new Specification<MyOrder>() {
+            @Override
+            public Predicate toPredicate(Root<MyOrder> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                //声明并创建MyOrder的criteriaQuery对象
+                CriteriaQuery<MyOrder> ql = cb.createQuery(MyOrder.class);
+                Join<Customer, MyOrder> myOrderJoin = root.join("customer", JoinType.INNER);
+                ql.select(myOrderJoin);
+                return ql.getRestriction();
+            }
+        };
+        resultPrint(spec);
+    }
+
+    /***
+     *输出分页信息
+     **/
+    private void resultPrint(Specification<MyOrder> spec) {
+        //分页查询
+        Pageable pageable = PageRequest.of(0,10, Sort.Direction.DESC,"id");
+        //查询的分页结果
+        Page<MyOrder> page =myOrderRepository.findAll(spec,pageable);
+        System.out.println(page);
+        System.out.println(page.getTotalElements());
+        System.out.println(page.getTotalPages());
+        for (MyOrder c:page.getContent()){
+            System.out.println(c.toString());
+        }
+    }
 }

@@ -6,6 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -56,5 +59,18 @@ public class JpatestApplicationTests {
     public void testSort() {
         Sort sort = new Sort(Sort.Direction.DESC,"id");
         repository.findByName3Sort("a",sort).forEach(System.out::println);
+    }
+
+    @Test
+    public void testModifying() {
+        System.out.println(repository.setFixedFirstnameFor("zhaozhao", "zhao"));
+        repository.findAll().forEach(System.out::println);
+    }
+
+    @Test
+    public void testHints() {
+        Pageable page = PageRequest.of(0, 3);
+        Page<Customer> pageResult = repository.findByName("a", page);
+        pageResult.getContent().forEach(System.out::println);
     }
 }

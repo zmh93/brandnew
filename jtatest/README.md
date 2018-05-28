@@ -1,5 +1,5 @@
 ### jtaTest
-1. tomcat默认不支持jta，需要引入 Jpa（atomikos）依赖。
+1. tomcat默认不支持jta，需要引入 Jta（atomikos）依赖。
 2. 使用configurationProperties需要引入 springboot的相关依赖
 3. 注意两个TestMybatisConfig中testDataSource@Bean注解的name要相同
 4. [利用 JTA 处理事务](https://www.ibm.com/developerworks/cn/java/j-lo-jta/)

@@ -1,9 +1,6 @@
-target/
-
+/target/
 !.mvn/wrapper/maven-wrapper.jar
-transaction-logs
-mvn*
-.mvn
+
 ### STS ###
 .apt_generated
 .classpath
@@ -11,6 +8,7 @@ mvn*
 .project
 .settings
 .springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
@@ -19,14 +17,9 @@ mvn*
 *.ipr
 
 ### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-.DS_Store
-overlays/
-.gradle/
-build/
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/

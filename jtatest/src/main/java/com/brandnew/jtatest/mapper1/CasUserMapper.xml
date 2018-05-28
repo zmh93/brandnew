@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.brandnew.jtatest.mapper1.CasUserMapper" >
+  <resultMap id="BaseResultMap" type="com.brandnew.jtatest.domain.CasUser" >
+    <id column="id" property="id" />
+    <result column="user_name" property="userName" />
+    <result column="password" property="password" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from `casuser`
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.brandnew.jtatest.domain.CasUser" useGeneratedKeys="true" keyProperty="id" >
+    insert into `casuser` (user_name, password)
+    values (#{userName}, #{password})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.brandnew.jtatest.domain.CasUser" >
+    update `casuser`
+    set user_name = #{userName},
+      password = #{password}
+    where id = #{id}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, user_name, password
+    from `casuser`
+    where id = #{id}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, user_name, password
+    from `casuser`
+  </select>
+</mapper>

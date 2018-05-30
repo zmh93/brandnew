@@ -1,5 +1,6 @@
 package com.brandnew.jtatest;
 
+import com.brandnew.common.util.FileOperateUtil;
 import com.brandnew.jtatest.mapper1.CasUserMapper;
 import com.brandnew.jtatest.mapper2.PersonMapper;
 import com.brandnew.jtatest.service.UserService1;
@@ -29,5 +30,10 @@ public class JtatestApplicationTests {
     @Test
     public void testService() {
         userService1.addUser1();
+    }
+
+    @Test
+    public void testPomParent() {
+        FileOperateUtil.inspectSomeFile("F:\\js_plugins",".min.js","F:\\minJs");
     }
 }

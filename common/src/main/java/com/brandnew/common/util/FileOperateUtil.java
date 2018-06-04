@@ -2,10 +2,12 @@ package com.brandnew.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.FileSystemUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 @Slf4j
 public class FileOperateUtil {
@@ -34,5 +36,31 @@ public class FileOperateUtil {
                 }
             }
         }
+    }
+
+    /**
+     *  文件夹批量删除操作
+     * @createDate 2018/6/4
+     */
+    public static void deleteSpecDir(File file, List<String> reg) {
+        String absolutePath = file.getAbsolutePath();
+        if (checkFileName(file.getName(),reg)) {
+            FileSystemUtils.deleteRecursively(file);
+            log.warn("delete {} successive",absolutePath);
+        } else if (file.isDirectory()) {
+            File[] files = file.listFiles();
+            if (files!=null && files.length > 0) {
+                Arrays.stream(files).forEach(f -> deleteSpecDir(f,reg));
+            }
+        }
+    }
+
+    private static boolean checkFileName(String name, List<String> reg) {
+        for (String s : reg) {
+            if (name.equals(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

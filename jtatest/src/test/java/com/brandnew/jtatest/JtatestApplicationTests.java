@@ -9,6 +9,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.FileSystemUtils;
+
+import java.io.File;
+import java.util.Arrays;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,7 +38,7 @@ public class JtatestApplicationTests {
     }
 
     @Test
-    public void testPomParent() {
-        FileOperateUtil.inspectSomeFile("F:\\js_plugins",".min.js","F:\\minJs");
+    public void clear9hjf() {
+        FileOperateUtil.deleteSpecDir(new File("E:\\E_workspace"), Arrays.asList("target",".classpath",".project",".setting",".svn",".idea"));
     }
 }

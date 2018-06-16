@@ -19,6 +19,8 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.criteria.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringRunner.class)
@@ -36,6 +38,7 @@ public class JpatestApplicationTests {
         repository.save(new Customer("David", "Palmer"));
         repository.save(new Customer("Michelle", "Dessler"));
         repository.save(new Customer("Bauer", "Dessler"));
+
     }
 
     @Test
@@ -105,13 +108,18 @@ public class JpatestApplicationTests {
 
     @Test
     public void saveMyOrders() {
+        repository.save(new Customer("Jack", "Bauer"));
         Optional<Customer> byId = repository.findById(1L);
-        Customer           customer = byId.get();/*
-        myOrderRepository.save(new MyOrder("柿饼", "3000", customer));
-        myOrderRepository.save(new MyOrder("苹果", "1000", customer));
-        myOrderRepository.save(new MyOrder("橘子", "2000", customer));
-        myOrderRepository.save(new MyOrder("香蕉", "10000", customer));*/
-        myOrderRepository.findAll().forEach(System.out::println);
+        Customer           customer = byId.get();
+        List<MyOrder> myOrders = new ArrayList<>();
+        myOrders.add(myOrderRepository.save(new MyOrder("柿饼", "3000", customer)));
+        myOrders.add(myOrderRepository.save(new MyOrder("苹果", "1000", customer)));
+        myOrders.add(myOrderRepository.save(new MyOrder("橘子", "2000", customer)));
+        myOrders.add(myOrderRepository.save(new MyOrder("香蕉", "10000", customer)));
+        customer.setMyOrders(myOrders);
+        repository.save(customer);
+//        myOrderRepository.findAll().forEach(System.out::println);
+        System.out.println(customer.getMyOrders());
     }
 
     @Test

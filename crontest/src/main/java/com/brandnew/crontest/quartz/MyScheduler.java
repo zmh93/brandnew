@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class MyScheduler {
     @Autowired
     SchedulerFactoryBean schedulerFactoryBean;

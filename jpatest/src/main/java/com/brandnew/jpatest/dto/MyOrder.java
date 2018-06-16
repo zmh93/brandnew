@@ -20,8 +20,9 @@ public class MyOrder {
     @JoinColumn(name = "cId", insertable = false, updatable = false)
     private Customer customer;
 
-    public MyOrder(String name, String price) {
+    public MyOrder(String name, String price,Customer customer) {
         this.name = name;
         this.price = price;
+        this.customer = customer;
     }
 }

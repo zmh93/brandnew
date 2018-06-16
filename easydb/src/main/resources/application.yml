@@ -1,7 +1,7 @@
 spring:
   datasource:
     platform: h2
-#    data: classpath:data.sql 需要从.sql文件生成时再指定,还需要把ddl-auto： none
+#    data: classpath: data.sql  .sql need to be be set when the file is generating,and this ddl-auto： none
 #    schema: classpath:schema.sql
   jpa:
     show-sql: true

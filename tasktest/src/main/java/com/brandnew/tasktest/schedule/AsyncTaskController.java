@@ -8,6 +8,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+
 /**
  * Title: AsyncTaskController
  * Description: 使用线程池多线程执行任务
@@ -20,10 +23,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Data
 public class AsyncTaskController implements Runnable {
 
-    private int                    executeFlag = 0;
+    private int executeFlag = 0;
+
     @Autowired
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
-
 
     @GetMapping("bundleTask")
     public String beginBundleTask() {
@@ -44,8 +47,17 @@ public class AsyncTaskController implements Runnable {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setCorePoolSize(10);
         taskExecutor.setMaxPoolSize(10);
-        taskExecutor.setQueueCapacity(50);
+        taskExecutor.setQueueCapacity(20);
+        taskExecutor.setRejectedExecutionHandler(new MyRejectedExecutionHandler());
         taskExecutor.initialize();
         return taskExecutor;
+    }
+}
+
+class MyRejectedExecutionHandler implements RejectedExecutionHandler {
+
+    @Override
+    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+        throw new RuntimeException("线程队列已满，请检查问题原因");
     }
 }

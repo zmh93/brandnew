@@ -3,8 +3,6 @@ package com.brandnew.crontest.schedule;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.Trigger;
-import org.springframework.scheduling.TriggerContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.support.CronTrigger;
@@ -29,27 +27,28 @@ public class SpringTaskController {
 
     @Autowired
     private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+    @Autowired
+    private AsyncTaskController     asyncTaskController;
 
     private ScheduledFuture<?> future;
-    //cron表达式 在线生成：http://cron.qqe2.com/
-    private String cronStr = "0/5 * * * * ? ";
 
-    //通过外部请求改变任务调度的时间
     @GetMapping("newTask")
     public String newTask(String taskName) {
-        resetTask(taskName.equals("task2") ? task2() : task1(),cronStr);
+        //cron表达式 在线生成：http://cron.qqe2.com/
+        String         cronStr = "0/5 * * * * ? ";
+        resetTask(taskName.equals("task2") ? task2() : task1(), cronStr);
         return "new task settled:" + taskName;
     }
 
     private void resetTask(Runnable task, String cronStr) {
-        if (future!=null) {
+        if (future != null) {
             future.cancel(true);
         }
         future = threadPoolTaskScheduler.schedule(task, new CronTrigger(cronStr));
     }
 
     @Bean
-    public ThreadPoolTaskScheduler trPoolTaskScheduler() {
+    public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
         return new ThreadPoolTaskScheduler();
     }
 

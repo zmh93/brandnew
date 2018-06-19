@@ -34,7 +34,7 @@ public class AsyncTaskController implements Runnable {
             threadPoolTaskExecutor.execute(this);
             threadPoolTaskExecutor.execute(this);
         }
-        return "bundle task begin!";
+        return "bundle task finish!";
     }
 
     @Override

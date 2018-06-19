@@ -13,6 +13,17 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Title: RSAEncrypt
+ * Description:
+ *
+ *   RSA是目前最有影响力的公钥加密算法，该算法基于一个十分简单的数论事实：
+ *   将两个大素数相乘十分容易，但那时想要对其乘积进行因式分解却极其困难，因此可以将乘积公开作为加密密钥，即公钥，
+ *   而两个大素数组合成私钥。公钥是可发布的供任何人使用，私钥则为自己所有，供解密之用。
+ *
+ * @author zmhzhaomenghui@gmail.com
+ * @createDate 2018/6/19
+ */
 public class RSAEncrypt {
 
     public static final String KEY_ALGORITHM = "RSA";

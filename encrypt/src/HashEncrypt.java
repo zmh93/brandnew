@@ -9,6 +9,17 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+/**
+ * Title: HashEncrypt
+ * Description:
+ *
+ *  密码杂凑函数（有时称作消息摘要函数，杂凑函数又称散列函数或哈希函数）不一定使用到钥匙，
+ *  但和许多重要的密码算法相关。它将输入资料（通常是一整份文件）输出成较短的固定长度杂凑值，
+ *  这个过程是单向的，逆向操作难以完成，而且碰撞（两个不同的输入产生相同的杂凑值）发生的机率非常小。
+ *
+ * @author zmhzhaomenghui@gmail.com
+ * @createDate 2018/6/19
+ */
 public class HashEncrypt {
     public static final String PLAIN_TEXT = "ASS HOLE";
     public static final String MD_ALGORITHM = "MD5";

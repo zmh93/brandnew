@@ -1,4 +1,4 @@
-package factory;
+package create.factory;
 
 interface Factory {
     Cat createCat();

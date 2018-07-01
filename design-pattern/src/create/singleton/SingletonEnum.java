@@ -1,4 +1,4 @@
-package singleton;
+package create.singleton;
 
 public enum SingletonEnum {
     INSTANCE;

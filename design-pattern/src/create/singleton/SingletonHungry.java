@@ -1,4 +1,4 @@
-package singleton;
+package create.singleton;
 
 public class SingletonHungry {
     private static SingletonHungry instance = new SingletonHungry();

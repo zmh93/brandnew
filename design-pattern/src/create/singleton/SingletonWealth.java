@@ -1,6 +1,4 @@
-package singleton;
-
-import java.util.Optional;
+package create.singleton;
 
 public class SingletonWealth {
     private static SingletonWealth instance;

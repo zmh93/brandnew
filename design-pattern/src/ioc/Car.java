@@ -25,7 +25,7 @@ class Engine {
         System.out.println("engine is running");
     }
 
-    public Engine() {
+    Engine() {
         this.screw = new Screw();
     }
 }
@@ -33,13 +33,13 @@ class Engine {
 class Screw {
     private Iron iron;
 
-    public Screw() {
+    Screw() {
         this.iron = new Iron();
     }
 }
 
 class Iron {
-    public Iron() {
+    Iron() {
         System.out.println("Iron is made");
     }
 }

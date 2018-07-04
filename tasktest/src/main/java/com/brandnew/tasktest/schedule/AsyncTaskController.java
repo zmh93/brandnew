@@ -42,22 +42,5 @@ public class AsyncTaskController implements Runnable {
         System.out.println("线程" + Thread.currentThread().getName() + "执行第" + ++executeFlag + "次");
     }
 
-    @Bean
-    public ThreadPoolTaskExecutor threadPoolTaskExecutor() {
-        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setCorePoolSize(10);
-        taskExecutor.setMaxPoolSize(10);
-        taskExecutor.setQueueCapacity(20);
-        taskExecutor.setRejectedExecutionHandler(new MyRejectedExecutionHandler());
-        taskExecutor.initialize();
-        return taskExecutor;
-    }
 }
 
-class MyRejectedExecutionHandler implements RejectedExecutionHandler {
-
-    @Override
-    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
-        throw new RuntimeException("线程队列已满，请检查问题原因");
-    }
-}

@@ -26,10 +26,13 @@ public class AESEncrypt {
         String iv="abcdefghijklmnop";
 
         System.out.println("加密前："+byteToHexString(content.getBytes()));
-        byte[ ] encrypted=AES_CBC_Encrypt(content.getBytes(), key.getBytes(), iv.getBytes());
+        byte[] encrypted=AES_CBC_Encrypt(content.getBytes(), key.getBytes(), iv.getBytes());
         System.out.println("加密后："+byteToHexString(encrypted));
         byte[ ] decrypted=AES_CBC_Decrypt(encrypted, key.getBytes(), iv.getBytes());
         System.out.println("解密后："+byteToHexString(decrypted));
+        byte[ ] newDecrypted=AES_CBC_Decrypt("U2FsdGVkX19vZQrCZDJQRnypRG5luiTJn2Ldr/iPUmeiUN5NnCF0L4Kf2QZpCr+rondBTfeM/Qe6CtDNdyRLWQ==".getBytes(), key.getBytes(),null);
+        System.out.println("解密后："+byteToHexString(newDecrypted));
+
     }
 
     public static byte[] AES_CBC_Encrypt(byte[] content, byte[] keyBytes, byte[] iv){
@@ -39,7 +42,11 @@ public class AESEncrypt {
             keyGenerator.init(128, new SecureRandom(keyBytes));
             SecretKey key=keyGenerator.generateKey();
             Cipher cipher=Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
+            if (iv != null) {
+                cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
+            } else {
+                cipher.init(Cipher.ENCRYPT_MODE, key);
+            }
             byte[] result=cipher.doFinal(content);
             return result;
         }catch (Exception e) {
@@ -56,7 +63,8 @@ public class AESEncrypt {
             keyGenerator.init(128, new SecureRandom(keyBytes));//key长可设为128，192，256位，这里只能设为128
             SecretKey key=keyGenerator.generateKey();
             Cipher cipher=Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+                cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
+
             byte[] result=cipher.doFinal(content);
             return result;
         }catch (Exception e) {

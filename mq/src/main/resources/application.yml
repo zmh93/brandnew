@@ -1,5 +1,17 @@
+
 spring:
   rabbitmq:
     host: 39.106.184.220
     username: testUser
     password: testPass
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql:///dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: admin
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+logging:
+  config:
+    root: error

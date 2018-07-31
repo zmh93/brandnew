@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql:///dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: admin
+
+mybatis:
+  mapperLocations:
+    - classpath*:com/example/tkmbt/mapper/*Mapper.xml
+logging:
+  level:
+    root: error

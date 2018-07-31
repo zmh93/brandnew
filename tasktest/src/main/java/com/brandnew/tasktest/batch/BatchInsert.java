@@ -35,6 +35,11 @@ public class BatchInsert implements Runnable {
         }
     }
 
+    /**
+     *  多线程插入数据，提高数据插入速度
+     * @createDate 2018/7/5
+     * @author zmh email: zmhzhaomenghui@gmail.com
+     */
     @GetMapping
     public String test() throws InterruptedException {
         for (int i = 0; i < 6428 ; i++) {

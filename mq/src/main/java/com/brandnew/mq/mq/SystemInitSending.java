@@ -1,18 +1,17 @@
 package com.brandnew.mq.mq;
 
+import com.brandnew.mq.mq.receiver.Receiver;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.concurrent.TimeUnit;
-
 @Component
-public class Runner implements CommandLineRunner {
+public class SystemInitSending implements CommandLineRunner {
 
     private final RabbitTemplate rabbitTemplate;
-    private final Receiver receiver;
+    private final Receiver       receiver;
 
-    public Runner(Receiver receiver, RabbitTemplate rabbitTemplate) {
+    public SystemInitSending(Receiver receiver, RabbitTemplate rabbitTemplate) {
         this.receiver = receiver;
         this.rabbitTemplate = rabbitTemplate;
     }

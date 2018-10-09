@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel("首页默认类")
 public class IndexModel {
+
+
     @ApiModelProperty("首页默认类id")
     private Long   id;
     @ApiModelProperty("首页默认类name")

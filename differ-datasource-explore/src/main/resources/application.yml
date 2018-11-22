@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    primary:
+      name: primaryDataSource
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql:///l_block_data
+      username: root
+      password: admin
+    secondary:
+      name: secondryDataSource
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql:///dev
+      username: root
+      password: admin
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+logging:
+  level:
+    root: warn
+    org:
+      hibernate: warn

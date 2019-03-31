@@ -11,8 +11,15 @@ public class MqSenderUtil {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    public void sendMessage(String queueName, Message1 message1) {
-        rabbitTemplate.convertAndSend(MqConstant.topicExchangeName, queueName, message1);
+    public void broadcast(String routingKey, Message1 message1) {
+        rabbitTemplate.convertAndSend(MqConstant.fanoutExchangeName, routingKey, message1);
     }
 
+    public void sendTopicMsg(String routingKey, Message1 message1) {
+        rabbitTemplate.convertAndSend(MqConstant.topicExchangeName, routingKey, message1);
+    }
+
+    public void sendDirectMsg(String routingKey, Message1 message1) {
+        rabbitTemplate.convertAndSend(MqConstant.directExchangeName,routingKey,message1);
+    }
 }

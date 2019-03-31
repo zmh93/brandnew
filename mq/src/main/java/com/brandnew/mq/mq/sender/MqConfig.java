@@ -1,9 +1,6 @@
 package com.brandnew.mq.mq.sender;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,23 +8,46 @@ import org.springframework.context.annotation.Configuration;
 public class MqConfig {
 
     @Bean
-    Queue queue() {
-        return new Queue(MqConstant.queueName1, false);
+    FanoutExchange exchange1() {
+        return new FanoutExchange(MqConstant.fanoutExchangeName);
     }
 
     @Bean
-    TopicExchange exchange() {
+    TopicExchange exchange2() {
         return new TopicExchange(MqConstant.topicExchangeName);
     }
 
     @Bean
-    Binding binding1(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(MqConstant.queueName1);
+    DirectExchange exchange3() {
+        return new DirectExchange(MqConstant.directExchangeName);
     }
 
+    @Bean
+    Queue queue1() {
+        return new Queue(MqConstant.routingKey1,false);
+    }
 
     @Bean
-    Binding binding2(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(MqConstant.queueName2);
+    Queue queue2() {
+        return new Queue(MqConstant.routingKey2,false);
+    }
+
+    @Bean
+    Binding binding1() {
+        return BindingBuilder.bind(queue1()).to(exchange1());
+    }
+
+    @Bean
+    Binding binding11() {
+        return BindingBuilder.bind(queue1()).to(exchange2()).with(MqConstant.routingKey1);
+    }
+    @Bean
+    Binding binding12() {
+        return BindingBuilder.bind(queue2()).to(exchange2()).with(MqConstant.routingKey2);
+    }
+
+    @Bean
+    Binding binding3() {
+        return BindingBuilder.bind(queue1()).to(exchange3()).with(MqConstant.routingKey1);
     }
 }

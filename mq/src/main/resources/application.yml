@@ -1,16 +1,12 @@
 spring:
   rabbitmq:
-    host: 39.106.184.220
+    host: 39.106.173.215
     username: admin
     password: admin
   data:
     mongodb:
-      host: 39.106.184.220
-      port: 8998
+      host: 39.106.173.215
 
-logging:
-  config:
-    root: error
 
 server:
   port: 8080

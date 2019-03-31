@@ -15,16 +15,16 @@ public class Receiver {
     @Autowired
     private MessageMapper messageMapper;
 
-    @RabbitListener(queues = MqConstant.queueName1)
-    public void receiveMessage1(Message1 message) {
-        System.out.println("Received message:" + message.toString());
+    @RabbitListener(queues = "com.zmh.queue1")
+    public void recever1(Message1 message) {
+        System.out.println("queue1:Received message:" + message.toString());
         messageMapper.insert(message);
     }
 
 
-    @RabbitListener(queues = MqConstant.queueName2)
-    public void receiveMessage2(Message1 message) {
-        System.out.println("Received message:" + message.toString());
+    @RabbitListener(queues = "com.zmh.queue2")
+    public void recever2(Message1 message) {
+        System.out.println("queue2: Received message:" + message.toString());
         messageMapper.insert(message);
     }
 

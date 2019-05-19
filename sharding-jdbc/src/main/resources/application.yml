@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    include: sharding
+  datasource:
+    type: org.apache.shardingsphere.shardingjdbc.spring.datasource.SpringShardingDataSource

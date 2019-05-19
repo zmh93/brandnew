@@ -1,0 +1,28 @@
+spring:
+  shardingsphere:
+    datasource:
+      names: ds0,ds1
+      ds0:
+        type: org.apache.commons.dbcp2.BasicDataSource
+        driver: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds0?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+      ds1:
+        type: org.apache.commons.dbcp2.BasicDataSource
+        driver: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/ds1?useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: admin
+    sharding:
+        default-database-strategy:
+          inline:
+            sharding-column: id
+            algorithm-expression: ds$->{id % 2}
+        tables:
+          test:
+            actual-data-nodes: ds$->{0..1}.test$->{0..1}
+            table-strategy:
+              inline:
+                sharding-column: order_id
+                algorithm-expression: test$->{order_id % 2}

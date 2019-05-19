@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * sharding-jdbc springboot+mybatis 集成
+ * @author zhaomenghui
+ */
+//doc https://shardingsphere.apache.org
 @SpringBootApplication
 @RestController
 public class ShardingjdbcApplication {

@@ -1,35 +1,25 @@
 package test.observer;
 
-import javafx.beans.binding.ObjectExpression;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class Subject {
-    public static TheState state;
-    private List<Observer> list = new ArrayList<>();
+    public static EnumSubjectState currentState;
+    private List<Observer> observerList = new ArrayList<>();
 
-    public void add(Observer observer) {
-        list.add(observer);
+    public void addObserver(Observer observer) {
+        observerList.add(observer);
     }
 
-    public void delete(Observer observer) {
-        list.remove(observer);
+    public void removeObeserver(Observer observer) {
+        observerList.remove(observer);
     }
 
-    public void doSth() {
-        Random random = new Random();
-        TheState[] values = TheState.values();
-        state = values[random.nextInt(4)];
-        updateState();
-    }
-
-    private void updateState() {
-        for (Observer observer : list) {
-            observer.update();
+    public void changeState() {
+        currentState = EnumSubjectState.values()[new Random().nextInt(EnumSubjectState.values().length)];
+        for (Observer observer : observerList) {
+            observer.updateSubjectState();
         }
     }
-
-
 }

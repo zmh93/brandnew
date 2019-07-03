@@ -23,8 +23,10 @@ public class DeepPrototype {
         Proto          p1     = new ConcreteProto1();
         Proto          p2     = new ConcreteProto2();
         ConcreteProto1 clone1 = (ConcreteProto1) p1.clone();
+        System.out.println(p1);
         System.out.println(clone1);
         ConcreteProto2 clone2 = (ConcreteProto2) p2.clone();
+        System.out.println(p2);
         System.out.println(clone2);
     }
 }

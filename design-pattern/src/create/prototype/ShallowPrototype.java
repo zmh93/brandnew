@@ -7,29 +7,53 @@ abstract class Prototype implements Cloneable {
 }
 
 class ConcretePrototype1 extends Prototype {
-    public static int classFlag = 1;
+    public static int classFlag = 0;
 
     public int getClassFlag() {
         return classFlag;
     }
 
+    public Model name;
+
+    public ConcretePrototype1(Model name) {
+        this.name = name;
+    }
+
     public Object clone() throws CloneNotSupportedException {
+        classFlag--;
         return (ConcretePrototype1) super.clone();
     }
 }
 
 class ConcretePrototype2 extends Prototype {
-    public static int classFlag = 2;
+    public static int classFlag = 0;
 
     public int getClassFlag() {
         return classFlag;
     }
 
+    public Model name;
+
+    public ConcretePrototype2(Model name) {
+        this.name = name;
+    }
+
     public Object clone() throws CloneNotSupportedException {
+        classFlag++;
         return (ConcretePrototype2) super.clone();
     }
 }
 
+class Model{
+    public String name;
+
+    public Model() {
+    }
+
+    public Model(String name) {
+        this.name = name;
+    }
+}
 /**
  * 使用原型模式创建对象比直接new一个对象在性能上要好的多，因为Object类的clone方法是一个本地方法，
  * 它直接操作内存中的二进制流，特别是复制大对象时，性能的差别非常明显。
@@ -39,8 +63,8 @@ class ConcretePrototype2 extends Prototype {
  */
 public class ShallowPrototype {
     public static void main(String[] args) throws CloneNotSupportedException {
-        Prototype          p1     = new ConcretePrototype1();
-        Prototype          p2     = new ConcretePrototype2();
+        Prototype          p1     = new ConcretePrototype1(new Model("我是model1"));
+        Prototype          p2     = new ConcretePrototype2(new Model("我是model2"));
         ConcretePrototype1 clone1 = (ConcretePrototype1) p1.clone();
         System.out.println(clone1.getClassFlag());
         ConcretePrototype2 clone2 = (ConcretePrototype2) p2.clone();

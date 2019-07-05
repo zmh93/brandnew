@@ -6,15 +6,14 @@ public class SingletonHungry {
     private SingletonHungry() {
     }
 
-    public SingletonHungry getInstance() {
+    public static SingletonHungry getInstance() {
         return instance;
     }
 
     public static void main(String[] args) {
-        SingletonHungry s = new SingletonHungry();
-        SingletonHungry i1 = s.getInstance();
-        SingletonHungry i2 = s.getInstance();
+        SingletonHungry i1 = SingletonHungry.getInstance();
+        SingletonHungry i2 = SingletonHungry.getInstance();
         System.out.println(i1 == i2);
-        System.out.println(i1 == new SingletonHungry());
+        System.out.println(i1 == SingletonHungry.getInstance());
     }
 }

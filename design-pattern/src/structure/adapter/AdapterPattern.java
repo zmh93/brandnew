@@ -10,11 +10,20 @@ interface Target {
     void request();
 }
 
-class Adapter extends Adaptee implements Target {
+interface Target2 {
+    void request2();
+}
+
+class Adapter extends Adaptee implements Target,Target2 {
 
     @Override
     public void request() {
         System.out.println("implements Adapter`s request()");
+    }
+
+    @Override
+    public void request2() {
+        System.out.println("this is target2`s define method");
     }
 }
 

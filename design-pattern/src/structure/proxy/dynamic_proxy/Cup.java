@@ -1,4 +1,4 @@
-package dynamic_proxy;
+package structure.proxy.dynamic_proxy;
 
 public class Cup implements ICup{
     public void drink() {

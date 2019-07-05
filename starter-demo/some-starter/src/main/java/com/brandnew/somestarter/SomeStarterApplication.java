@@ -1,13 +1,13 @@
-package com.brandner.starterdemo;
+package com.brandnew.somestarter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StarterDemoApplication {
+public class SomeStarterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StarterDemoApplication.class, args);
+        SpringApplication.run(SomeStarterApplication.class, args);
     }
 
 }
